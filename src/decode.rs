@@ -824,6 +824,11 @@ impl<C: CodeBuffer> Stateful for DecodeState<C> {
                 link = new_link;
             }
 
+            if out.is_empty() {
+                code_link = Some((code, link));
+                break;
+            }
+
             // Update the slice holding the last decoded word.
             if let Some(new_last) = target[..burst_size - 1].last_mut() {
                 let slice = core::mem::replace(new_last, &mut []);
